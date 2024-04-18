@@ -1,8 +1,37 @@
 import re
 
+import re
+
 def normalize_phone(num:str)->str:
 
     """
+    REQUESTED FLOW.
+    Function returns normalized phone number in format +380...(digits) as string
+    This function ignores phone number length
+    Arguments:
+    num - raw phone number as string
+    """
+
+    #We get all digits and + from the raw phone number
+    pattern = r"[^\d\+]"  
+    normalized_phone = re.sub(pattern,"",num)
+
+    if normalized_phone.startswith("+38") == False: #we do nothing if international prefix is correct
+        if normalized_phone.startswith("38"): # Add + at the beginning.
+            return "+" + normalized_phone
+        else:
+            return "+38"+normalized_phone # Add full internation prefix
+    
+        
+
+
+    return normalized_phone
+
+
+def normalize_phone_v2(num:str)->str:
+
+    """
+    IMPROVED FLOW
     Function returns normalized phone number in format +380...(digits) as string
     This function ignores phone number length
     Arguments:
